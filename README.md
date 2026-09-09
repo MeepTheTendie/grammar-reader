@@ -25,3 +25,5 @@ Refresh old tabs after deployment. The old revisionless sync protocol is rejecte
 Static files use Cloudflare Workers Assets. Builds include the sync client and security headers, and Philosophy Scholar keeps API responses out of its offline cache. The shared D1 schema is unchanged. Back up the remote D1 database before deployment.
 
 Validation: `npm ci && npm run check`. Wrangler is pinned; the sharp override fixes the development-tool advisory without downgrading Wrangler. The unit suite exercises actual SQLite revision writes as well as merges, deletions, authentication and body limits.
+
+Deployment preflight verifies the required `SYNC_KEY_HASH` secret. The previously plain-text binding was preserved from deployment history and moved to a Wrangler secret; existing pairing links remain valid.
